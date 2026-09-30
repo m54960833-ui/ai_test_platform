@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AITestPlatform - AI 接口自动化测试平台</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">AITestPlatform</div>
+    <div class="tagline">AI 辅助接口自动化测试平台</div>
+  </header>
+
+  <main>
+    <!-- 统计卡片 -->
+    <section class="stats" id="stats">
+      <div class="card"><b id="st_total">-</b><span>用例总数</span></div>
+      <div class="card"><b id="st_passed">-</b><span>通过</span></div>
+      <div class="card"><b id="st_failed">-</b><span>失败</span></div>
+      <div class="card"><b id="st_rate">-</b><span>通过率</span></div>
+    </section>
+
+    <!-- 操作按钮 -->
+    <section class="actions">
+      <button id="btn_run" class="btn primary">▶ 执行测试</button>
+      <button id="btn_ai_gen" class="btn">🤖 AI 生成用例</button>
+      <button id="btn_ai_analyze" class="btn">🔍 AI 分析失败</button>
+      <span id="tip" class="tip"></span>
+    </section>
+
+    <!-- 用例列表 -->
+    <section class="panel">
+      <h2>测试用例 <span class="hint">(点击删除仅限 web.yaml 中手动添加的用例)</span></h2>
+      <table id="case_table">
+        <thead><tr><th>用例名</th><th>方法</th><th>路径</th><th>来源</th><th>断言数</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 报告列表 -->
+    <section class="panel">
+      <h2>历史报告</h2>
+      <table id="report_table">
+        <thead><tr><th>报告ID</th><th>时间</th><th>通过/总数</th><th>通过率</th><th>耗时(s)</th><th>来源</th><th>操作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 报告详情 / AI 分析 -->
+    <section class="panel" id="detail_panel" style="display:none">
+      <h2 id="detail_title">报告详情</h2>
+      <div id="detail_body"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

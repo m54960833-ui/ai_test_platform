@@ -1,0 +1,44 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Microsoft YaHei", -apple-system, sans-serif; background: #f2f4f8; color: #2b2f3a; }
+header { background: linear-gradient(135deg, #1f3a6e, #3a6fb0); color: #fff; padding: 18px 28px; display: flex; align-items: baseline; gap: 14px; }
+.brand { font-size: 22px; font-weight: 700; letter-spacing: .5px; }
+.tagline { font-size: 13px; opacity: .85; }
+
+main { max-width: 1100px; margin: 20px auto; padding: 0 16px; }
+
+.stats { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; }
+.card { background: #fff; border-radius: 10px; padding: 16px 22px; min-width: 130px; box-shadow: 0 1px 5px rgba(0,0,0,.06); }
+.card b { font-size: 26px; display: block; color: #1f3a6e; }
+.card span { font-size: 12px; color: #8a8f9c; }
+
+.actions { margin-bottom: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn { border: 0; border-radius: 8px; padding: 9px 16px; font-size: 14px; cursor: pointer; background: #eef1f6; color: #2b2f3a; }
+.btn:hover { background: #e2e7f0; }
+.btn.primary { background: #2f6fd0; color: #fff; }
+.btn.primary:hover { background: #275bb0; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.tip { font-size: 13px; color: #5a8f6a; }
+
+.panel { background: #fff; border-radius: 10px; padding: 18px 22px; margin-bottom: 18px; box-shadow: 0 1px 5px rgba(0,0,0,.06); }
+.panel h2 { font-size: 16px; margin-bottom: 12px; color: #1f3a6e; }
+.hint { font-size: 12px; color: #a0a5b1; font-weight: normal; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid #eff1f5; font-size: 13px; }
+th { color: #8a8f9c; font-weight: 600; background: #fafbfd; }
+.method { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; color: #fff; }
+.m.GEt { background: #3f7be0; }
+.m.POST { background: #2ecc71; }
+.m.PUT { background: #f39c12; }
+.m.DELETE { background: #e74c3c; }
+
+.tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; color: #fff; }
+.tag.pass { background: #2ecc71; }
+.tag.fail { background: #e74c3c; }
+.tag.skip { background: #f39c12; }
+
+.err { color: #c0392b; font-size: 12px; white-space: pre-wrap; }
+.link { color: #2f6fd0; cursor: pointer; text-decoration: underline; font-size: 12px; }
+.del { color: #e74c3c; cursor: pointer; font-size: 12px; }
+
+.analysis { background: #f8fafc; border-left: 3px solid #3a6fb0; padding: 12px 14px; border-radius: 6px; font-size: 13px; line-height: 1.7; white-space: pre-wrap; }
