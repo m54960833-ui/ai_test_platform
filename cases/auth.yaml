@@ -1,0 +1,83 @@
+# 认证接口测试用例：注册 / 登录
+# 注意：注册用户名用 @rand 生成随机后缀，避免重复执行时撞库
+- name: 注册-正常
+  method: POST
+  url: /api/auth/register
+  headers:
+    Content-Type: application/json
+  body:
+    username: "test_@{rand}"
+    password: "pass123"
+    email: "t@{rand}@x.com"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 0
+  save:
+    - {key: reg_user, from: body.username}
+    - {key: reg_uid, from: data.user_id}
+
+- name: 注册-用户名已存在
+  method: POST
+  url: /api/auth/register
+  body:
+    username: "demo"
+    password: "pass123"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 1001
+
+- name: 注册-密码不足6位(参数校验失败)
+  method: POST
+  url: /api/auth/register
+  body:
+    username: "short_@{rand}"
+    password: "123"
+  validate:
+    # FastAPI 的 pydantic 校验失败统一返回 422
+    - type: status_code
+      value: 422
+
+- name: 登录-正常
+  method: POST
+  url: /api/auth/login
+  body:
+    username: "demo"
+    password: "demo1234"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.data.token"
+      value: "@nonempty"
+
+- name: 登录-密码错误
+  method: POST
+  url: /api/auth/login
+  body:
+    username: "demo"
+    password: "wrong_pass"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 1002
+
+- name: 登录-用户不存在
+  method: POST
+  url: /api/auth/login
+  body:
+    username: "not_exist_user"
+    password: "123456"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 1002

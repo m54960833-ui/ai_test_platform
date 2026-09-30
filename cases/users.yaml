@@ -1,0 +1,77 @@
+# 用户接口测试用例
+# 平台默认已带登录态（run.py 里先 login），这里的 401 用例靠覆盖 Authorization 头来测
+- name: 用户-获取存在的用户
+  method: GET
+  url: /api/users/1
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.data.username"
+      value: "demo"
+
+- name: 用户-获取不存在的用户(404)
+  method: GET
+  url: /api/users/999999
+  validate:
+    - type: status_code
+      value: 404
+
+- name: 用户-token无效(401)
+  method: GET
+  url: /api/users/1
+  headers:
+    Authorization: "Bearer invalid.token.xxx"
+  validate:
+    - type: status_code
+      value: 401
+
+- name: 用户-更新资料
+  method: PUT
+  url: /api/users/1
+  body:
+    email: "demo_new@x.com"
+    nickname: "演示用户2"
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.data.user_id"
+      value: 1
+
+- name: 用户-列表分页
+  method: GET
+  url: /api/users?page=1&page_size=5
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.data.total"
+      value: "@nonempty"
+
+- name: 用户-删除注册用户
+  method: DELETE
+  url: /api/users/@{reg_uid}
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 0
+
+- name: 用户-删除后再次获取(404)
+  method: GET
+  url: /api/users/@{reg_uid}
+  validate:
+    - type: status_code
+      value: 404
+
+- name: 用户-删除演示用户被拦截
+  method: DELETE
+  url: /api/users/1
+  validate:
+    - type: status_code
+      value: 200
+    - type: jsonpath
+      path: "$.code"
+      value: 1003
