@@ -1,0 +1,36 @@
+# ============================================================
+# AITestPlatform 全局配置
+# 页面里改的配置会回写到这里（改前记得备份）
+# ============================================================
+
+# 被测服务相关
+server:
+  host: "127.0.0.1"
+  port: 8001
+
+# Web 管理平台相关
+web:
+  host: "127.0.0.1"
+  port: 8002
+
+# 测试执行相关
+test:
+  # 请求超时时间（秒）
+  timeout: 15
+  # 失败后重试次数，0 表示不重试
+  retry: 0
+  # 是否保存每次执行的原始响应到 reports/
+  save_resp: true
+
+# 大模型配置（用于 AI 生成测试用例 / Badcase 分析）
+# 接的是 OpenAI 兼容接口。当前默认对接智谱 GLM：
+#   base_url: https://open.bigmodel.cn/api/paas/v4   （模型如 glm-4-flash / glm-4-plus）
+# 也兼容火山方舟（豆包）等平台，换 base_url 和 model 即可。
+# api_key 优先读环境变量（见 api_key_env），没设置时读项目根目录 .env 里的同名变量；
+# 都没有则自动降级为模板生成，功能不缺失。
+llm:
+  enabled: true
+  base_url: "https://open.bigmodel.cn/api/paas/v4"
+  model: "glm-4-flash"
+  # 环境变量名，也对应 .env 里的键
+  api_key_env: "ZHIPU_API_KEY"

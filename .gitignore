@@ -1,0 +1,10 @@
+# 运行时产物，不入库
+__pycache__/
+*.pyc
+reports/report_*.json
+reports/report_*.html
+data/aitest.db
+# AI 生成的用例是可再生的草稿，不入库
+cases/_ai_generated/
+# 本地 API Key 别提交
+.env
